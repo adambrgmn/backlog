@@ -11,7 +11,9 @@
     "precommit": "lint-staged"
   },
   "dependencies": {
+    "date-fns": "^1.29.0",
     "polished": "^1.8.2",
+    "raf-schd": "^2.0.1",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.17",
