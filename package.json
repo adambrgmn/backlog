@@ -2,15 +2,29 @@
   "name": "backlog",
   "version": "0.1.0",
   "private": true,
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "flow": "flow",
+    "precommit": "lint-staged"
+  },
   "dependencies": {
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "1.0.17"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+  "devDependencies": {
+    "flow-bin": "^0.58.0",
+    "husky": "^0.14.3",
+    "lint-staged": "^4.3.0",
+    "prettier": "^1.8.0"
+  },
+  "lint-staged": {
+    "*.js": ["prettier --single-quote --trailing-comma all --write", "git add"],
+    "*.css": ["prettier", "git add"],
+    "*.json": ["prettier", "git add"],
+    "*.md": ["prettier", "git add"]
   }
 }
