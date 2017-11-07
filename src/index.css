@@ -18,7 +18,7 @@ html::before {
 body {
   position: relative;
   margin: 0;
-  padding: 2rem;
+  padding: 1rem;
   background-color: transparent;
   z-index: 2;
 }

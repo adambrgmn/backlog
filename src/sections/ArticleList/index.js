@@ -1,11 +1,27 @@
 // @flow
 import React from 'react';
+import styled from 'styled-components';
 import Container from './Container';
-import ArticleContainer from './ArticleContainer';
-import { ArticleHeader, ArticleFooter } from './ArticleSection';
+import ArticleCheckbox from './ArticleCheckbox';
 import ArticleTitle from './ArticleTitle';
-import ArticleLink from './ArticleLink';
 import ArticleDate from './ArticleDate';
+
+const PostElement = styled.li`
+  display: flex;
+  align-items: center;
+  margin-bottom: 1em;
+`;
+
+const PostField = styled.div`
+  min-width: 0;
+  margin-right: 1rem;
+
+  &:last-child {
+    min-width: 3.5rem;
+    margin-right: 0;
+    margin-left: auto;
+  }
+`;
 
 type Post = {
   id: string,
@@ -22,31 +38,19 @@ function ArticleList({ posts }: Props) {
   return (
     <Container>
       {posts.map(post => (
-        <ArticleContainer key={post.id}>
-          <ArticleHeader>
-            <ArticleTitle href={post.link}>{post.title}</ArticleTitle>
-            <ArticleLink href={post.link}>{post.link}</ArticleLink>
-          </ArticleHeader>
+        <PostElement key={post.id}>
+          <PostField>
+            <ArticleCheckbox name={post.id} checked={false} />
+          </PostField>
 
-          <ArticleFooter>
-            <ArticleDate date={post.createdAt} />
+          <PostField>
+            <ArticleTitle title={post.title} href={post.link} />
+          </PostField>
 
-            <div>
-              <ul>
-                {post.tags.map(tag => (
-                  <li key={tag}>
-                    <button>{tag}</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div>
-              <button>Mark as done</button>
-              <button>Remove</button>
-            </div>
-          </ArticleFooter>
-        </ArticleContainer>
+          <PostField>
+            <ArticleDate date={post.updatedAt} />
+          </PostField>
+        </PostElement>
       ))}
     </Container>
   );

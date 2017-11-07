@@ -1,41 +1,49 @@
 // @flow
 import React from 'react';
 import styled from 'styled-components';
-import { modularScale } from 'polished';
-import { hoverBrand } from '../../styles/helpers';
+import { modularScale, ellipsis } from 'polished';
+import { font } from '../../styles/theme';
 
-const Title = styled.h1`
-  position: relative;
-  display: flex;
-  align-items: baseline;
+const Button = styled.button`
+  display: block;
+  width: 100%;
   margin: 0;
+  border: none;
+  border-radius: 0;
   padding: 0;
+  font-size: 1em;
+  text-align: left;
+  background-color: transparent;
+`;
+
+const Title = styled.span`
+  margin: 0;
+  font-family: ${font.body};
   font-size: ${modularScale(-1)};
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica,
-    Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
   font-weight: 400;
   text-transform: uppercase;
   letter-spacing: 0.15em;
-
-  &::before {
-    content: '»';
-    position: absolute;
-    left: -1em;
-    transform: translateY(-0.1em);
-  }
+  ${ellipsis('100%')};
 `;
 
-const Link = styled.a`
-  color: currentColor;
-  text-decoration: none;
-  ${hoverBrand()};
+const SubTitle = Title.extend`
+  text-transform: initial;
+  font-size: ${modularScale(-2)};
+  letter-spacing: 0.15em;
+  ${ellipsis('100%')};
 `;
 
-function ArticleTitle({ href, children }: { href: string, children: string }) {
+type Props = {
+  title: string,
+  href: string,
+};
+
+function ArticleTitle({ title, href }: Props) {
   return (
-    <Title>
-      <Link href={href}>{children}</Link>
-    </Title>
+    <Button>
+      <Title>{title}</Title>
+      <SubTitle>{href.replace(/^https?:\/\//, '')}</SubTitle>
+    </Button>
   );
 }
 
